@@ -1,0 +1,13 @@
+nginx:
+  restart: unless-stopped
+  build: .
+  ports:
+    - 80:80
+    - 443:443
+  environment:
+    email: owner@company.com
+    confd: ./conf.d
+    certdir: letsencrypt
+  volumes:
+    - ${confd}:/etc/nginx/conf.d
+    - ${certdir}:/etc/letsencrypt
